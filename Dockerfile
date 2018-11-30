@@ -5,4 +5,6 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 
 copy ./target/services.war /usr/local/tomcat/webapps/ROOT.war
 
+EXPOSE 80
+
 CMD ["catalina.sh","run"]
