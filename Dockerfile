@@ -1,10 +1,9 @@
 From tomcat:8.0.51-jre8-alpine
 
-
-RUN rm -rf /usr/local/tomcat/webapps/*
+#RUN rm -rf /usr/local/tomcat/webapps/*
 
 copy ./target/services.war /usr/local/tomcat/webapps/ROOT.war
 
-EXPOSE 80
+#EXPOSE 80
 
-CMD ["catalina.sh","run"]
+#CMD ["catalina.sh","run"]

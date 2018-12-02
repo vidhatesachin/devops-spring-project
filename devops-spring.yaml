@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: devops-spring-app
+  name: spring-boot-app
 spec:
   replicas: 1
   strategy:
@@ -12,43 +12,27 @@ spec:
   template:
     metadata:
       labels:
-        app: devops-spring-app
+        app: spring-boot-app
     spec:
       containers:
-      - name: devops-spring-app
-        image: vidhatesachintest/devops-spring:latest
+      - name: spring-boot-app
+        image: vidhatesachintest/spring-boot-app:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         resources:
           requests:
             cpu: 250m
           limits:
             cpu: 500m
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: spring-boot-service
 spec:
+  type: LoadBalancer
   ports:
-  - port: 8080
-    targetPort: 8080
-    name: http
-  - port: 8081
-    targetPort: 8081
-    name: management
+  - port: 80
   selector:
-    app: devops-spring-app
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: spring-boot-ingress
-  annotations:
-    kubernetes.io/ingress.allow-http: "false"
-spec:
-  tls:
-  - secretName: your-tls-secret
-  backend:
-    serviceName: spring-boot-service
-    servicePort: 8080
+    app: spring-boot-app
