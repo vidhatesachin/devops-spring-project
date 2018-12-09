@@ -33,6 +33,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
+  - protocol: TCP
   - port: 80
+  - targetPort: 80
   selector:
     app: spring-boot-app
